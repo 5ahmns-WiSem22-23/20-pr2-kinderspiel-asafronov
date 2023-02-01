@@ -124,4 +124,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e71ddfa111daa46807c70c8b6679f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorName: green
   fields: []

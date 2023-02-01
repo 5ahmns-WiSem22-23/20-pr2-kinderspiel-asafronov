@@ -1,6 +1,8 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-namespace PickAndDrop
+namespace GameSettingNamespace
 {
     public class GameSettings : MonoBehaviour
     {
@@ -13,37 +15,72 @@ namespace PickAndDrop
         GameObject ape;
         ApeScript apeScript;
 
+        GameObject[] apes;
+        public int blueVariable;
+        public int greenVariable;
+        public int yellowVariable;
+        public int redVariable;
+
+        BeutelScript bagObject;
+
         [SerializeField] Animator bagAnimator;
         [SerializeField] string open;
         [SerializeField] string close;
+
+        public Text blue;
+        public Text green;
+        public Text yellow;
+        public Text red;
+
+        public GameObject blueWin;
+        public GameObject greenWin;
+        public GameObject yellowWin;
+        public GameObject redWin;
 
         private void Start()
         {
             if (instance == null) instance = this;
             else Destroy(this);
+
+            bagObject = FindObjectOfType<BeutelScript>();
         }
 
         void Update()
         {
-            //bool prev = pick;
+            blue.text = "Blau: " + blueVariable.ToString();
+            green.text = "Grün: " + greenVariable.ToString();
+            yellow.text = "Gelb: " + yellowVariable.ToString();
+            red.text = "Rot: " + redVariable.ToString();
 
-            //ape.transform.position = mousePosition;
-            //if(prev && !pick)
-            //{
-            //    float distance = 999;
-            //    Vector3 target = Vector3.zero;
+            if (blueVariable >= 6 || greenVariable >= 6 || yellowVariable >= 6 || redVariable >= 6) bagObject.enabled = false;
 
-            //    foreach (var field in fields)
-            //    {
-            //        if (field.taken) continue;
-            //        float distance2 = Vector3.Distance(GameObject.Find(apeName).transform.position, field.transform.position);
-            //        if (distance2 > distance) continue;
-            //        distance = distance2;
-            //        target = field.transform.position;
-            //        field.taken = true;
-            //    }
+            if (blueVariable >= 6)
+            {
+                Debug.Log("BLUE");
+                blueWin.gameObject.SetActive(true);
+            }
+            if (greenVariable >= 6)
+            {
+                Debug.Log("GRÜN!");
+                greenWin.gameObject.SetActive(true);
+            }
 
-            //    GameObject.Find(apeName).GetComponent<Collider2D>().enabled = false;
+            if (yellowVariable >= 6) 
+            {
+                Debug.Log("GELB");
+                yellowWin.gameObject.SetActive(true);
+            }
+            
+            if (redVariable >= 6) 
+            {
+                Debug.Log("ROT");
+                redWin.gameObject.SetActive(true);
+            }
+        }
+
+        public void RestartGame(string SceneName)
+        {
+            SceneManager.LoadScene(SceneName);
         }
     }
 }

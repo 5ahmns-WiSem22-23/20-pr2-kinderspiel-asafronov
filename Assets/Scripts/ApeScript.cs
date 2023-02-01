@@ -1,4 +1,4 @@
-using PickAndDrop;
+using GameSettingNamespace;
 using UnityEngine;
 
 public class ApeScript : MonoBehaviour
@@ -12,7 +12,13 @@ public class ApeScript : MonoBehaviour
 
     private void Start()
     {
+        settings = FindObjectOfType<GameSettings>();
         fields = GameObject.FindGameObjectsWithTag("Field");
+
+        if (colorName == "blue") settings.blueVariable++;
+        if (colorName == "green") settings.greenVariable++;
+        if (colorName == "yellow") settings.yellowVariable++;
+        if (colorName == "red") settings.redVariable++;
     }
 
     private void Update()

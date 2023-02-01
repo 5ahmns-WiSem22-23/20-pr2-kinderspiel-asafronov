@@ -34,8 +34,8 @@ public class BeutelScript : MonoBehaviour
     {
         col.enabled = false;
         animator.Play("BagOpen");
-        Instantiate(apes[Random.Range(1, 4)]);
-        yield return new WaitForSeconds(2f);
+        Instantiate(apes[Random.Range(0, apes.Length)]);
+        yield return new WaitForSeconds(0.75f);
         col.enabled = true;
         animator.Play("BagClose");
     }
